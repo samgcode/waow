@@ -10,7 +10,7 @@ use winit::{
 
 mod canvas;
 mod color;
-mod shapes;
+pub mod shapes;
 
 pub use canvas::Canvas;
 pub use color::Color;

@@ -1,7 +1,9 @@
 use crate::Color;
 
+mod image;
 mod rectangle;
 
+pub use image::Image;
 pub use rectangle::Rectangle;
 
 pub trait Drawable {

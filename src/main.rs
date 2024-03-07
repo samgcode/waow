@@ -17,10 +17,14 @@ fn start(_canvas: &mut Canvas) {
   println!("start");
 }
 
-fn draw(canvas: &mut Canvas, input: &Input) {
-  if let Some(mouse_position) = input.mouse() {
-    if input.key_held(KeyCode::C) {
-      println!("mouse pos: {:?}", mouse_position);
+fn draw(canvas: &mut Canvas, _input: &Input) {
+  let mut img = shapes::Image::new(0, 0, 10, 10);
+
+  for x in 0..10 {
+    for y in 0..10 {
+      img.set_pixel(x, y, Color::from_rgba(1.0, 0.0, 0.0, 1.0, false));
     }
   }
+
+  canvas.draw_shape(img);
 }
