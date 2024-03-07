@@ -1,7 +1,9 @@
-mod square;
+use crate::Color;
 
-pub use square::Square;
+mod rectangle;
+
+pub use rectangle::Rectangle;
 
 pub trait Drawable {
-  fn get_color(&self, x: i16, y: i16) -> Option<[u8; 4]>;
+  fn get_color(&self, x: i16, y: i16) -> Option<Color>;
 }

@@ -10,14 +10,16 @@ use winit::{
 use winit_input_helper::WinitInputHelper;
 
 mod canvas;
+mod color;
 mod shapes;
 
 pub use canvas::Canvas;
+pub use color::Color;
 
 pub struct CanvasConfiguration {
   pub width: u32,
   pub height: u32,
-  pub background_color: [u8; 4],
+  pub background_color: Color,
   pub window_name: String,
 }
 

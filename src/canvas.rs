@@ -1,12 +1,12 @@
 use crate::{
-  shapes::{Drawable, Square},
-  CanvasConfiguration,
+  shapes::{Drawable, Rectangle},
+  CanvasConfiguration, Color,
 };
 
 pub struct Canvas {
   width: u32,
   height: u32,
-  background_color: [u8; 4],
+  background_color: Color,
   objects: Vec<Box<dyn Drawable>>,
 }
 
@@ -32,11 +32,11 @@ impl Canvas {
       let mut rgba = self.background_color;
       for object in self.objects.iter() {
         if let Some(color) = object.as_ref().get_color(x, y) {
-          rgba = color;
+          rgba += color;
         }
       }
 
-      pixel.copy_from_slice(&rgba);
+      pixel.copy_from_slice(&rgba.as_bytes());
     }
 
     self.objects = Vec::<Box<dyn Drawable>>::new();
@@ -44,7 +44,15 @@ impl Canvas {
 }
 
 impl Canvas {
-  pub fn draw_square(&mut self, x: i16, y: i16, size: i16, color: [u8; 4]) {
-    self.objects.push(Box::new(Square::new(x, y, size, color)));
+  pub fn draw_shape(&mut self, shape: impl Drawable + 'static) {
+    self.objects.push(Box::new(shape));
+  }
+
+  pub fn draw_square(&mut self, x: i16, y: i16, size: i16, color: Color) {
+    self.draw_shape(Rectangle::new(x, y, size, size, color));
+  }
+
+  pub fn draw_rect(&mut self, x: i16, y: i16, width: i16, height: i16, color: Color) {
+    self.draw_shape(Rectangle::new(x, y, width, height, color));
   }
 }

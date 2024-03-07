@@ -7,7 +7,7 @@ fn main() {
     CanvasConfiguration {
       width: 400,
       height: 400,
-      background_color: [128, 0, 128, 255],
+      background_color: Color::from_rgba(0.0, 0.0, 0.0, 1.0, false),
       window_name: String::from("waow!"),
     },
   );
@@ -17,6 +17,4 @@ fn start(_canvas: &mut Canvas) {
   println!("start");
 }
 
-fn draw(canvas: &mut Canvas) {
-  canvas.draw_square(50, 50, 20, [255, 0, 0, 255]);
-}
+fn draw(canvas: &mut Canvas) {}
