@@ -17,4 +17,10 @@ fn start(_canvas: &mut Canvas) {
   println!("start");
 }
 
-fn draw(canvas: &mut Canvas) {}
+fn draw(canvas: &mut Canvas, input: &Input) {
+  if let Some(mouse_position) = input.mouse() {
+    if input.key_held(KeyCode::C) {
+      println!("mouse pos: {:?}", mouse_position);
+    }
+  }
+}

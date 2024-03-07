@@ -3,11 +3,10 @@ use log::error;
 use pixels::{Pixels, SurfaceTexture};
 use winit::{
   dpi::LogicalSize,
-  event::{Event, VirtualKeyCode},
+  event::Event,
   event_loop::{ControlFlow, EventLoop},
   window::WindowBuilder,
 };
-use winit_input_helper::WinitInputHelper;
 
 mod canvas;
 mod color;
@@ -15,6 +14,8 @@ mod shapes;
 
 pub use canvas::Canvas;
 pub use color::Color;
+pub use winit::event::VirtualKeyCode as KeyCode;
+pub use winit_input_helper::WinitInputHelper as Input;
 
 pub struct CanvasConfiguration {
   pub width: u32,
@@ -26,11 +27,11 @@ pub struct CanvasConfiguration {
 pub fn create<S, U>(start: S, draw: U, config: CanvasConfiguration)
 where
   S: FnOnce(&mut Canvas) + 'static,
-  U: Fn(&mut Canvas) + 'static,
+  U: Fn(&mut Canvas, &Input) + 'static,
 {
   env_logger::init();
   let event_loop = EventLoop::new();
-  let mut input = WinitInputHelper::new();
+  let mut input = Input::new();
 
   let mut canvas = Canvas::new(&config);
 
@@ -66,12 +67,12 @@ where
     }
 
     if input.update(&event) {
-      if input.key_pressed(VirtualKeyCode::Escape) || input.close_requested() {
+      if input.close_requested() {
         *control_flow = ControlFlow::Exit;
         return;
       }
 
-      draw(&mut canvas);
+      draw(&mut canvas, &input);
       window.request_redraw();
     }
   });
