@@ -1,9 +1,9 @@
 use waow::*;
 
 fn main() {
+  let app = App::create();
   create(
-    start,
-    draw,
+    app,
     CanvasConfiguration {
       width: 400,
       height: 400,
@@ -12,19 +12,30 @@ fn main() {
     },
   );
 }
-
-fn start(_canvas: &mut Canvas) {
-  println!("start");
+struct App {
+  img: shapes::Image,
 }
 
-fn draw(canvas: &mut Canvas, _input: &Input) {
-  let mut img = shapes::Image::new(0, 0, 10, 10);
+impl App {
+  pub fn create() -> Self {
+    return Self {
+      img: shapes::Image::new(0, 0, 10, 10),
+    };
+  }
+}
 
-  for x in 0..10 {
-    for y in 0..10 {
-      img.set_pixel(x, y, Color::from_rgba(1.0, 0.0, 0.0, 1.0, false));
+impl Run for App {
+  fn start(&mut self, _canvas: &mut Canvas) {
+    for x in 0..10 {
+      for y in 0..10 {
+        self
+          .img
+          .set_pixel(x, y, Color::from_rgba(1.0, 0.0, 0.0, 1.0, false));
+      }
     }
   }
 
-  canvas.draw_shape(img);
+  fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
+    canvas.draw_shape(self.img.clone());
+  }
 }

@@ -24,11 +24,12 @@ pub struct CanvasConfiguration {
   pub window_name: String,
 }
 
-pub fn create<S, U>(start: S, draw: U, config: CanvasConfiguration)
-where
-  S: FnOnce(&mut Canvas) + 'static,
-  U: Fn(&mut Canvas, &Input) + 'static,
-{
+pub trait Run {
+  fn start(&mut self, canvas: &mut Canvas);
+  fn draw(&mut self, canvas: &mut Canvas, input: &Input);
+}
+
+pub fn create(mut app: impl Run + 'static, config: CanvasConfiguration) {
   env_logger::init();
   let event_loop = EventLoop::new();
   let mut input = Input::new();
@@ -53,7 +54,7 @@ where
     Pixels::new(width, height, surface_texture).unwrap()
   };
 
-  start(&mut canvas);
+  app.start(&mut canvas);
 
   event_loop.run(move |event, _, control_flow| {
     if let Event::RedrawRequested(_) = event {
@@ -72,7 +73,7 @@ where
         return;
       }
 
-      draw(&mut canvas, &input);
+      app.draw(&mut canvas, &input);
       window.request_redraw();
     }
   });
