@@ -36,6 +36,6 @@ impl Run for App {
   }
 
   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-    canvas.draw_shape(self.img.clone());
+    canvas.draw_image(&self.img);
   }
 }

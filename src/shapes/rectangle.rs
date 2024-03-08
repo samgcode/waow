@@ -1,6 +1,7 @@
 use super::Drawable;
 use crate::Color;
 
+#[derive(Clone)]
 pub struct Rectangle {
   x: i16,
   y: i16,

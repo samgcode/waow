@@ -1,5 +1,5 @@
 use crate::{
-  shapes::{Drawable, Rectangle},
+  shapes::{Drawable, Image, Rectangle},
   CanvasConfiguration, Color,
 };
 
@@ -44,15 +44,19 @@ impl Canvas {
 }
 
 impl Canvas {
-  pub fn draw_shape(&mut self, shape: impl Drawable + 'static) {
-    self.objects.push(Box::new(shape));
+  pub fn draw_shape(&mut self, shape: &(impl Drawable + Clone + 'static)) {
+    self.objects.push(Box::new(shape.clone()));
   }
 
   pub fn draw_square(&mut self, x: i16, y: i16, size: i16, color: Color) {
-    self.draw_shape(Rectangle::new(x, y, size, size, color));
+    self.draw_shape(&Rectangle::new(x, y, size, size, color));
   }
 
   pub fn draw_rect(&mut self, x: i16, y: i16, width: i16, height: i16, color: Color) {
-    self.draw_shape(Rectangle::new(x, y, width, height, color));
+    self.draw_shape(&Rectangle::new(x, y, width, height, color));
+  }
+
+  pub fn draw_image(&mut self, image: &Image) {
+    self.draw_shape(image);
   }
 }
