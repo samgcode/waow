@@ -1,3 +1,23 @@
+//! Represents a rectangle with a solid color at some position on the screen
+//!
+//! # Examples
+//! ```
+//! use waow::*;
+//!
+//! struct App {}
+//! impl Run for App {
+//!   fn start(&mut self, _canvas: &mut Canvas) {}
+//!   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
+//!     let rectangle = shapes::Rectangle::new(
+//!       10, 10, 30, 50,
+//!       Color::from_rgba(1.0, 0.0, 0.0, 1.0, false
+//!     ));
+//!
+//!     canvas.draw_shape(&rectangle);
+//!   }
+//! }
+//! ```
+
 use super::Drawable;
 use crate::Color;
 
@@ -11,6 +31,20 @@ pub struct Rectangle {
 }
 
 impl Rectangle {
+  /// creates a new rectangle
+  ///
+  /// Creates a new rectangle withe the given `x` and `y` as its top right corner,
+  /// with a size of `width` x `height`, and a fill color of `color`
+  ///
+  /// # Examples
+  /// ```
+  /// use waow::*;
+  ///
+  /// let rectangle = shapes::Rectangle::new(
+  ///   10, 10, 30, 50,
+  ///   Color::from_rgba(1.0, 0.0, 0.0, 1.0, false
+  /// ));
+  /// ````
   pub fn new(x: i16, y: i16, width: i16, height: i16, color: Color) -> Self {
     return Self {
       x,
