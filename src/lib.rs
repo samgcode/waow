@@ -1,3 +1,12 @@
+//! A simple api for creating and drawing to a window
+//!
+//! waow provides functionality for creating a window,
+//! and preforming various operations about it such as
+//! drawing shapes, and reading user input
+//!
+//! For a quick start, see the [examples](!todo)
+//!
+
 use error_iter::ErrorIter;
 use log::error;
 use pixels::{Pixels, SurfaceTexture};
@@ -12,11 +21,38 @@ mod canvas;
 mod color;
 pub mod shapes;
 
+// Public reexports
 pub use canvas::Canvas;
 pub use color::Color;
 pub use winit::event::VirtualKeyCode as KeyCode;
 pub use winit_input_helper::WinitInputHelper as Input;
 
+/// Holds the configuration of the canvas.
+///
+/// Passed into the [`create()`] method to set the various
+/// attributes of the canvas
+///
+/// # Examples
+/// ```
+/// use waow::*;
+///
+/// let app = App {};
+/// create(
+///   app,
+///   CanvasConfiguration {
+///     width: 400,
+///     height: 400,
+///     background_color: Color::from_rgba(0.0, 0.0, 0.0, 1.0, false),
+///     window_name: String::from("waow!"),
+///   },
+/// );
+///
+/// struct App {}
+/// impl Run for App {
+///   fn start(&mut self, _canvas: &mut Canvas) {}
+///   fn draw(&mut self, _canvas: &mut Canvas, _input: &Input) {}
+/// }
+/// ```
 pub struct CanvasConfiguration {
   pub width: u32,
   pub height: u32,
@@ -24,11 +60,63 @@ pub struct CanvasConfiguration {
   pub window_name: String,
 }
 
+/// Defines the behavior for an app that effects the canvas
+///
+/// The `start()` method is called before the first frame
+/// The `draw()` method is called every frame
+///
+/// # Examples
+/// ```
+/// use waow::*;
+///
+/// struct App {}
+/// impl Run for App {
+///   fn start(&mut self, _canvas: &mut Canvas) {}
+///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
+///     canvas.draw_square(50, 50, 20, Color::from_rgba(1.0, 0.0, 0.0, 1.0, false))
+///   }
+/// }
+/// ```
 pub trait Run {
   fn start(&mut self, canvas: &mut Canvas);
   fn draw(&mut self, canvas: &mut Canvas, input: &Input);
 }
 
+/// Creates a canvas to draw on
+///
+/// Creates a new window with the given [`CanvasConfiguration`]
+/// and runs the app with the canvas
+/// # Examples
+/// ```
+/// use waow::*;
+///
+/// fn main() {
+///   let app = App {};
+///   create(
+///     app,
+///     CanvasConfiguration {
+///       width: 400,
+///       height: 400,
+///       background_color: Color::from_rgba(0.0, 0.0, 0.0, 1.0, false),
+///       window_name: String::from("waow!"),
+///     },
+///   );
+/// }
+///
+/// struct App {}
+/// impl Run for App {
+///   fn start(&mut self, _canvas: &mut Canvas) {}
+///   fn draw(&mut self, canvas: &mut Canvas, input: &Input) {
+///     if let Some(mouse_pos) = input.mouse() {
+///       let mut color = Color::from_rgba(1.0, 0.0, 0.0, 1.0, false);
+///       if input.key_held(KeyCode::D) {
+///         color = Color::from_rgba(0.0, 1.0, 0.0, 1.0, false);
+///       }
+///       canvas.draw_square(mouse_pos.0 as i16, mouse_pos.1 as i16, 20, color);
+///     }
+///   }
+/// }
+/// ```
 pub fn create(mut app: impl Run + 'static, config: CanvasConfiguration) {
   env_logger::init();
   let event_loop = EventLoop::new();
