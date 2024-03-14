@@ -4,8 +4,7 @@
 //! and preforming various operations about it such as
 //! drawing shapes, and reading user input
 //!
-//! For a quick start, see the [examples](!todo)
-//!
+//! For a quick start, see the [examples](https://github.com/samgcode/waow/tree/master/examples)
 
 use error_iter::ErrorIter;
 use log::error;
@@ -21,9 +20,11 @@ mod canvas;
 mod color;
 pub mod shapes;
 
-// Public reexports
+/// Canvas that can be drawn to and gets displayed on the screen
 pub use canvas::Canvas;
+/// represents an RGBA color
 pub use color::Color;
+/// Represents an input key
 pub use winit::event::VirtualKeyCode as KeyCode;
 pub use winit_input_helper::WinitInputHelper as Input;
 

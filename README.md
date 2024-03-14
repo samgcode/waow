@@ -16,7 +16,7 @@ In cargo.toml:
 
 ```toml
 [dependencies]
-waow="0.8.0"
+waow="0.8.1"
 ```
 
 Then in main.rs:
@@ -66,4 +66,4 @@ impl Run for App {
 }
 ```
 
-For info on how to use all of the features, check out the [examples](!todo), or read the [docs](!todo)
+For info on how to use all of the features, check out the [examples](https://github.com/samgcode/waow/tree/master/examples), or read the [docs](!todo)

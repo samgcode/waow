@@ -9,8 +9,9 @@ use crate::Color;
 mod image;
 mod rectangle;
 
-/// public reexports
+/// An array of pixels that can be drawn to the screen
 pub use image::Image;
+/// A solid color rectangle
 pub use rectangle::Rectangle;
 
 /// Defines shared behavior for drawable objects
