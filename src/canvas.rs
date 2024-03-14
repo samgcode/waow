@@ -39,7 +39,7 @@ impl Canvas {
       let mut rgba = self.background_color;
       for object in self.objects.iter() {
         if let Some(color) = object.as_ref().get_color(x, y) {
-          rgba += color;
+          rgba = color;
         }
       }
 
@@ -68,7 +68,7 @@ impl Canvas {
   /// impl Run for App {
   ///   fn start(&mut self, _canvas: &mut Canvas) {}
   ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-  ///     canvas.draw_square(10, 10, 30, Color::from_rgba(0.0, 1.0, 0.5, 1.0, false));
+  ///     canvas.draw_square(10, 10, 30, Color::from_rgba(0.0, 1.0, 0.5, 1.0));
   ///   }
   /// }
   /// ```
@@ -86,7 +86,7 @@ impl Canvas {
   /// impl Run for App {
   ///   fn start(&mut self, _canvas: &mut Canvas) {}
   ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-  ///     canvas.draw_rect(50, 10, 20, 50, Color::from_rgba(0.0, 0.5, 1.0, 1.0, false));
+  ///     canvas.draw_rect(50, 10, 20, 50, Color::from_rgba(0.0, 0.5, 1.0, 1.0));
   ///   }
   /// }
   /// ```

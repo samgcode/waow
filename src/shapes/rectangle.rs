@@ -10,7 +10,7 @@
 //!   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
 //!     let rectangle = shapes::Rectangle::new(
 //!       10, 10, 30, 50,
-//!       Color::from_rgba(1.0, 0.0, 0.0, 1.0, false
+//!       Color::from_rgba(1.0, 0.0, 0.0, 1.0
 //!     ));
 //!
 //!     canvas.draw_shape(&rectangle);
@@ -42,7 +42,7 @@ impl Rectangle {
   ///
   /// let rectangle = shapes::Rectangle::new(
   ///   10, 10, 30, 50,
-  ///   Color::from_rgba(1.0, 0.0, 0.0, 1.0, false
+  ///   Color::from_rgba(1.0, 0.0, 0.0, 1.0
   /// ));
   /// ````
   pub fn new(x: i16, y: i16, width: i16, height: i16, color: Color) -> Self {

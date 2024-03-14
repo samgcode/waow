@@ -16,7 +16,7 @@ In cargo.toml:
 
 ```toml
 [dependencies]
-waow="0.7.3"
+waow="0.8.0"
 ```
 
 Then in main.rs:
@@ -36,7 +36,7 @@ fn main() {
     CanvasConfiguration {
       width: 400,
       height: 400,
-      background_color: Color::from_rgba(0.0, 0.0, 0.0, 1.0, false),
+      background_color: Color::from_rgba(0.0, 0.0, 0.0, 1.0),
       window_name: String::from("waow!"),
     },
   );

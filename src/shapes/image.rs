@@ -22,7 +22,7 @@
 //!   fn draw(&mut self, canvas: &mut Canvas, input: &Input) {
 //!     for x in 0..255 {
 //!      for y in 0..255 {
-//!         self.image.set_pixel(x, y, Color::from_rgba_int(x as u8, y as u8, 128, 255, false));
+//!         self.image.set_pixel(x, y, Color::from_rgba_int(x as u8, y as u8, 128, 255));
 //!      }
 //!    }
 //!    canvas.draw_shape(&self.image);
@@ -60,7 +60,7 @@ impl Image {
     for _ in 0..width {
       let mut col = Vec::<Color>::new();
       for _ in 0..height {
-        col.push(Color::from_rgba(0.0, 0.0, 0.0, 1.0, false));
+        col.push(Color::from_rgba(0.0, 0.0, 0.0, 1.0));
       }
 
       pixels.push(col);
@@ -86,7 +86,7 @@ impl Image {
   /// let mut img = shapes::Image::new(0, 0, 255, 255);
   /// for x in 0..255 {
   ///   for y in 0..255 {
-  ///     img.set_pixel(x, y, Color::from_rgba_int(x as u8, y as u8, 128, 255, false));
+  ///     img.set_pixel(x, y, Color::from_rgba_int(x as u8, y as u8, 128, 255));
   ///   }
   /// }
   /// ````
