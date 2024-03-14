@@ -16,7 +16,7 @@ In cargo.toml:
 
 ```toml
 [dependencies]
-waow="0.7.0"
+waow="0.7.2"
 ```
 
 Then in main.rs:

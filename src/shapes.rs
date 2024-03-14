@@ -15,7 +15,7 @@ pub use rectangle::Rectangle;
 
 /// Defines shared behavior for drawable objects
 ///
-/// the [`get_color()`] method takes in pixel coordinates on the screen
+/// the `get_color()` method takes in pixel coordinates on the screen
 /// and returns the color of the object at that coordinate
 ///
 /// returns `None` if the position is not within the object
@@ -38,7 +38,7 @@ pub use rectangle::Rectangle;
 ///     }
 ///   }
 /// }
-/// ````
+/// ```
 pub trait Drawable {
   fn get_color(&self, x: i16, y: i16) -> Option<Color>;
 }
