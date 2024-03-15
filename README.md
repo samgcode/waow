@@ -16,12 +16,12 @@ In cargo.toml:
 
 ```toml
 [dependencies]
-waow="0.8.2"
+waow="0.8.3"
 ```
 
 Then in main.rs:
 
-```rs
+```rust
 // import waow
 use waow::*;
 
@@ -66,4 +66,4 @@ impl Run for App {
 }
 ```
 
-For info on how to use all of the features, check out the [examples](https://github.com/samgcode/waow/tree/master/examples), or read the [docs](!todo)
+For info on how to use all of the features, check out the [examples](https://github.com/samgcode/waow/tree/master/examples), or read the [docs](https://docs.rs/waow/latest/waow/)

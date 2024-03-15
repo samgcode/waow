@@ -1,6 +1,7 @@
 //! A simple api for creating and drawing to a window
 //!
-//! waow provides functionality for creating a window,
+//! waow is a beginner friendly creative coding library.
+//! It provides functionality for creating a window,
 //! and preforming various operations about it such as
 //! drawing shapes, and reading user input
 //!
@@ -26,6 +27,7 @@ pub use canvas::Canvas;
 pub use color::Color;
 /// Represents an input key
 pub use winit::event::VirtualKeyCode as KeyCode;
+/// Handles user input events
 pub use winit_input_helper::WinitInputHelper as Input;
 
 /// Holds the configuration of the canvas.
