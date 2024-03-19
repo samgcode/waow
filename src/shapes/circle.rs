@@ -28,7 +28,9 @@ pub struct Circle {
   #[allow(dead_code)]
   radius: i16,
   radius_squared: i32,
-  color: Color,
+  fill: Option<Color>,
+  border: Option<Color>,
+  border_width: i16,
 }
 
 impl Circle {
@@ -41,19 +43,53 @@ impl Circle {
   /// ```
   /// use waow::*;
   ///
-  /// let circle = shapes::Circle::new(
-  ///   50, 50, 30,
-  ///   Color::from_rgba(1.0, 0.0, 0.0, 1.0
-  /// ));
+  /// let circle = shapes::Circle::new(50, 50, 30);
   /// ````
-  pub fn new(x: i16, y: i16, radius: i16, color: Color) -> Self {
+  pub fn new(x: i16, y: i16, radius: i16) -> Self {
     return Self {
       x,
       y,
       radius,
       radius_squared: (radius * radius) as i32,
-      color,
+      fill: None,
+      border: None,
+      border_width: 0,
     };
+  }
+
+  /// A builder that adds a fill to a rectangle
+  ///
+  /// Takes an instance of a rectangle and returns an instance with
+  /// the fill set to `color`
+  ///
+  /// # Examples
+  /// ```
+  /// use waow::*;
+  ///
+  /// let rectangle = shapes::Rectangle::new(10, 10, 30, 50)
+  ///   .with_fill(Color::from_rgba(1.0, 0.0, 0.0, 1.0));
+  /// ```
+  pub fn with_fill(mut self, color: Color) -> Self {
+    self.fill = Some(color);
+    return self;
+  }
+
+  /// A builder that adds a border to a rectangle
+  ///
+  /// Takes an instance of a rectangle and returns an instance with
+  /// the border color set to `color` and border width set to `width`
+  ///
+  /// # Examples
+  /// ```
+  /// use waow::*;
+  ///
+  /// let rectangle = shapes::Rectangle::new(10, 10, 30, 50)
+  ///   .with_border(Color::from_rgba(0.0, 0.0, 1.0, 1.0), 4);
+  /// ```
+  pub fn with_border(mut self, color: Color, width: i16) -> Self {
+    self.border = Some(color);
+    self.border_width = width;
+    return self;
   }
 }
 
@@ -61,11 +97,22 @@ impl Drawable for Circle {
   fn get_color(&self, x: i16, y: i16) -> Option<Color> {
     let dx = (x - self.x) as i32;
     let dy = (y - self.y) as i32;
+    let dist_sq = dx * dx + dy * dy;
 
-    return if (dx * dx + dy * dy) <= self.radius_squared {
-      Some(self.color)
-    } else {
-      None
-    };
+    if dist_sq > self.radius_squared {
+      return None;
+    }
+
+    if let Some(_) = self.border {
+      if dist_sq > ((self.radius - self.border_width) * (self.radius - self.border_width)) as i32 {
+        return self.border;
+      }
+    }
+
+    if let Some(_) = self.fill {
+      return self.fill;
+    }
+
+    return None;
   }
 }
