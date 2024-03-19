@@ -27,7 +27,9 @@ pub struct Rectangle {
   y: i16,
   width: i16,
   height: i16,
-  color: Color,
+  fill: Option<Color>,
+  border: Option<Color>,
+  border_width: i16,
 }
 
 impl Rectangle {
@@ -45,25 +47,50 @@ impl Rectangle {
   ///   Color::from_rgba(1.0, 0.0, 0.0, 1.0
   /// ));
   /// ````
-  pub fn new(x: i16, y: i16, width: i16, height: i16, color: Color) -> Self {
+  pub fn new(x: i16, y: i16, width: i16, height: i16) -> Self {
     return Self {
       x,
       y,
       width,
       height,
-      color,
+      fill: None,
+      border: None,
+      border_width: 0,
     };
+  }
+
+  pub fn with_fill(mut self, fill: Color) -> Self {
+    self.fill = Some(fill);
+    return self;
+  }
+
+  pub fn with_border(mut self, border: Color, width: i16) -> Self {
+    self.border = Some(border);
+    self.border_width = width;
+    return self;
   }
 }
 
 impl Drawable for Rectangle {
   fn get_color(&self, x: i16, y: i16) -> Option<Color> {
-    let inside_the_box =
-      x >= self.x && x < self.x + self.width && y >= self.y && y < self.y + self.height;
-    return if inside_the_box {
-      Some(self.color)
-    } else {
-      None
-    };
+    if x < self.x || y < self.y || x >= self.x + self.width || y >= self.y + self.height {
+      return None;
+    }
+
+    if let Some(_) = self.border {
+      if x < self.x + self.border_width
+        || y < self.y + self.border_width
+        || x >= self.x + self.width - self.border_width
+        || y >= self.y + self.height - self.border_width
+      {
+        return self.border;
+      }
+    }
+
+    if let Some(_) = self.fill {
+      return self.fill;
+    }
+
+    return None;
   }
 }

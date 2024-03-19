@@ -68,12 +68,45 @@ impl Canvas {
   /// impl Run for App {
   ///   fn start(&mut self, _canvas: &mut Canvas) {}
   ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-  ///     canvas.draw_square(10, 10, 30, Color::from_rgba(0.0, 1.0, 0.5, 1.0));
+  ///     canvas.draw_square(10, 10, 30, Color::from_rgba(0.0, 1.0, 0.5, 1.0), None);
   ///   }
   /// }
   /// ```
-  pub fn draw_square(&mut self, x: i16, y: i16, size: i16, color: Color) {
-    self.draw_shape(&Rectangle::new(x, y, size, size, color));
+  ///
+  /// ```
+  /// use waow::*;
+  ///
+  /// struct App {}
+  /// impl Run for App {
+  ///   fn start(&mut self, _canvas: &mut Canvas) {}
+  ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
+  ///     canvas.draw_square(
+  ///       10,
+  ///       10,
+  ///       30,
+  ///       Color::from_rgba(0.0, 1.0, 0.5, 1.0),
+  ///       Some((Color::from_rgba(1.0, 1.0, 1.0, 1.0), 3)),
+  ///     );
+  ///   }
+  /// }
+  /// ```
+  pub fn draw_square(
+    &mut self,
+    x: i16,
+    y: i16,
+    size: i16,
+    fill: Color,
+    border: Option<(Color, i16)>,
+  ) {
+    let square = if let Some((color, width)) = border {
+      Rectangle::new(x, y, size, size)
+        .with_fill(fill)
+        .with_border(color, width)
+    } else {
+      Rectangle::new(x, y, size, size).with_fill(fill)
+    };
+
+    self.draw_shape(&square);
   }
 
   /// Draws a rectangle with the specified position, width, height, and color
@@ -86,12 +119,44 @@ impl Canvas {
   /// impl Run for App {
   ///   fn start(&mut self, _canvas: &mut Canvas) {}
   ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-  ///     canvas.draw_rect(50, 10, 20, 50, Color::from_rgba(0.0, 0.5, 1.0, 1.0));
+  ///     canvas.draw_rect(50, 10, 20, 50, Color::from_rgba(0.0, 0.5, 1.0, 1.0), None);
   ///   }
   /// }
   /// ```
-  pub fn draw_rect(&mut self, x: i16, y: i16, width: i16, height: i16, color: Color) {
-    self.draw_shape(&Rectangle::new(x, y, width, height, color));
+  ///
+  /// ```
+  /// use waow::*;
+  ///
+  /// struct App {}
+  /// impl Run for App {
+  ///   fn start(&mut self, _canvas: &mut Canvas) {}
+  ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
+  ///     canvas.draw_rect(
+  ///       10, 10, 30, 50,
+  ///       Color::from_rgba(0.0, 1.0, 0.5, 1.0),
+  ///       Some((Color::from_rgba(1.0, 1.0, 1.0, 1.0), 3)),
+  ///     );
+  ///   }
+  /// }
+  /// ```
+  pub fn draw_rect(
+    &mut self,
+    x: i16,
+    y: i16,
+    width: i16,
+    height: i16,
+    fill: Color,
+    border: Option<(Color, i16)>,
+  ) {
+    let rect = if let Some((color, border_width)) = border {
+      Rectangle::new(x, y, width, height)
+        .with_fill(fill)
+        .with_border(color, border_width)
+    } else {
+      Rectangle::new(x, y, width, height).with_fill(fill)
+    };
+
+    self.draw_shape(&rect);
   }
 
   /// Draws an image object to the canvas

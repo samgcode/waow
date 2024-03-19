@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-waow = "0.9.0"
+waow = "0.10.0"
