@@ -53,6 +53,7 @@ impl Run for App {
           (mouse_pos.1 - 10.0) as i16,
           20,
           color,
+          None,
         );
       }
     }

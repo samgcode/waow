@@ -14,7 +14,7 @@ mod rectangle;
 pub use circle::Circle;
 /// An array of pixels that can be drawn to the screen
 pub use image::Image;
-/// A solid color rectangle
+/// A rectangle with border and fill
 pub use rectangle::Rectangle;
 
 /// Defines shared behavior for drawable objects

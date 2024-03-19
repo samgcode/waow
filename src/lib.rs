@@ -76,7 +76,7 @@ pub struct CanvasConfiguration {
 /// impl Run for App {
 ///   fn start(&mut self, _canvas: &mut Canvas) {}
 ///   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-///     canvas.draw_square(50, 50, 20, Color::from_rgba(1.0, 0.0, 0.0, 1.0))
+///     canvas.draw_square(50, 50, 20, Color::from_rgba(1.0, 0.0, 0.0, 1.0), None)
 ///   }
 /// }
 /// ```
@@ -115,7 +115,7 @@ pub trait Run {
 ///       if input.key_held(KeyCode::D) {
 ///         color = Color::from_rgba(0.0, 1.0, 0.0, 1.0);
 ///       }
-///       canvas.draw_square(mouse_pos.0 as i16, mouse_pos.1 as i16, 20, color);
+///       canvas.draw_square(mouse_pos.0 as i16, mouse_pos.1 as i16, 20, color, None);
 ///     }
 ///   }
 /// }
