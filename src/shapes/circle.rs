@@ -8,10 +8,9 @@
 //! impl Run for App {
 //!   fn start(&mut self, _canvas: &mut Canvas) {}
 //!   fn draw(&mut self, canvas: &mut Canvas, _input: &Input) {
-//!     let circle = shapes::Circle::new(
-//!       50, 50, 30,
-//!       Color::from_rgba(1.0, 0.0, 0.0, 1.0
-//!     ));
+//!     let circle = shapes::Circle::new(50, 50, 30)
+//!       .with_fill(Color::from_rgba(1.0, 0.0, 0.0, 1.0))
+//!       .with_border(Color::from_rgba(0.0, 0.0, 1.0, 1.0), 4);
 //!
 //!     canvas.draw_shape(&circle);
 //!   }
@@ -37,7 +36,7 @@ impl Circle {
   /// creates a new circle
   ///
   /// Creates a new circle with the given `x` and `y` as its center,
-  /// with a radius of `radius`, and a fill color of `color`
+  /// with a radius of `radius`, and a fill and border color of `None`
   ///
   /// # Examples
   /// ```
@@ -57,16 +56,16 @@ impl Circle {
     };
   }
 
-  /// A builder that adds a fill to a rectangle
+  /// A builder that adds a fill to a circle
   ///
-  /// Takes an instance of a rectangle and returns an instance with
+  /// Takes an instance of a circle and returns an instance with
   /// the fill set to `color`
   ///
   /// # Examples
   /// ```
   /// use waow::*;
   ///
-  /// let rectangle = shapes::Rectangle::new(10, 10, 30, 50)
+  /// let circle = shapes::Circle::new(10, 10, 30)
   ///   .with_fill(Color::from_rgba(1.0, 0.0, 0.0, 1.0));
   /// ```
   pub fn with_fill(mut self, color: Color) -> Self {
@@ -74,16 +73,16 @@ impl Circle {
     return self;
   }
 
-  /// A builder that adds a border to a rectangle
+  /// A builder that adds a border to a circle
   ///
-  /// Takes an instance of a rectangle and returns an instance with
+  /// Takes an instance of a circle and returns an instance with
   /// the border color set to `color` and border width set to `width`
   ///
   /// # Examples
   /// ```
   /// use waow::*;
   ///
-  /// let rectangle = shapes::Rectangle::new(10, 10, 30, 50)
+  /// let circle = shapes::Circle::new(10, 10, 30)
   ///   .with_border(Color::from_rgba(0.0, 0.0, 1.0, 1.0), 4);
   /// ```
   pub fn with_border(mut self, color: Color, width: i16) -> Self {

@@ -10,7 +10,7 @@ mod circle;
 mod image;
 mod rectangle;
 
-/// A solid color circle
+/// A circle with a fill and border
 pub use circle::Circle;
 /// An array of pixels that can be drawn to the screen
 pub use image::Image;
