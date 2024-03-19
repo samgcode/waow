@@ -1,14 +1,17 @@
 //! provides an api for creating shapes to be drawn
 //!
-//! shapes provides a list of [Structs](#Structs) that can be
+//! shapes provides a list of [Structs](#structs) that can be
 //! drawn to the screen. It also provides the [`Drawable`] trait
 //! which allows for creating objects with custom behaviour
 
 use crate::Color;
 
+mod circle;
 mod image;
 mod rectangle;
 
+/// A solid color circle
+pub use circle::Circle;
 /// An array of pixels that can be drawn to the screen
 pub use image::Image;
 /// A solid color rectangle

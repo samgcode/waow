@@ -5,7 +5,7 @@
 Heres what you can do with waow:
 
 - Draw simple shapes to the screen
-  - currently: rectangle, but more will be added soon
+  - currently: rectangle, circle, but more will be added soon
 - Draw an image (essentially an array of pixels)
 - Create custom shapes with the `Drawable` trait
 - Get user input using the `Input` module
@@ -16,7 +16,7 @@ In cargo.toml:
 
 ```toml
 [dependencies]
-waow="0.8.3"
+waow="0.9.0"
 ```
 
 Then in main.rs:
