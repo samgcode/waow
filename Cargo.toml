@@ -1,6 +1,6 @@
 [package]
 name = "waow"
-version = "0.10.3"
+version = "0.10.4"
 edition = "2021"
 description = "A begginer friendly creative coding library"
 license = "MIT OR Apache-2.0"
